@@ -12,13 +12,13 @@
       $scope.arrEmotionsActive = -1;
       $scope.arrEmotionsMessage = "";
   
+      // Init controller
       init();
   
       function init() {
         // Get Henry Data
         $getJson = $http.get('/henry')
           .then(function(data){
-            // Load Natural language service
             $scope.arrEmotions = data.data;
           });    
       }      

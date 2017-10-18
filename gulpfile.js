@@ -1,30 +1,11 @@
 const gulp = require('gulp');
-//const browserSync = require('browser-sync').create();
 const browserSync = require('browser-sync');
 const reload = browserSync.reload;
 var nodemon = require('gulp-nodemon');
 
-gulp.task('serve', ['nodemon'], () => {
-  // browserSync.init({
-  //   //notify: true,
-  //   port: 9000,    
-  //   middleware: function (req, res, next) {
-  //     res.setHeader('Access-Control-Allow-Origin', '*');
-  //     res.setHeader('Access-Control-Allow-Headers', 'Origin, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, X-Response-Time, X-PINGOTHER, X-CSRF-Token,Authorization');
-  //     res.setHeader('Access-Control-Allow-Methods', '*');
-  //     res.setHeader('Access-Control-Expose-Headers', 'X-Api-Version, X-Request-Id, X-Response-Time');
-  //     res.setHeader('Access-Control-Allow-Credentials', 'true');
-  //     next();
-  //   },
-  //   server: {
-  //     baseDir: 'app/client',
-  //   },
-  //   cors: false
-  // });
-
+gulp.task('serve', ['nodemon'], () => { 
   browserSync.init(null, {
 		    proxy: "http://localhost:5000",
-        files: ["app/client/*.*"],        
         port: 7000,
 	});
 

@@ -6,27 +6,25 @@ var app = express();
 var cors = require('cors');
 var router = express.Router();
 var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
+var henryJson = require('./henry_iv.json');
+var bodyParser = require('body-parser');
+var config = {
+    'username': 'e01c6a3d-1965-41fe-b2df-b7430b72d720',
+    'password': 'VeZeale8cxBr',
+    'version_date': '2017-02-27'
+};
 
-//app.use(express.static('./app/client/'));
-function setupCORS(req, res, next) {
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With, Content-type,Accept,X-Access-Token,X-Key,Authorization');
-    res.header('Access-Control-Allow-Origin', '*');
-    if (req.method === 'OPTIONS') {
-        res.status(200).end();
-    } else {
-        next();
-    }
-}
-app.get('/', function(req, res) {        
-    var natural_language_understanding = new NaturalLanguageUnderstandingV1({
-      'username': 'e01c6a3d-1965-41fe-b2df-b7430b72d720',
-      'password': 'VeZeale8cxBr',
-      'version_date': '2017-02-27'
-    });
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
+app.use(express.static('./app/client/'));
+
+app.post('/emotion', function(req, res) {      
+    var natural_language_understanding = new NaturalLanguageUnderstandingV1(config);
+    console.log(req.body.text_entry);    
     
     var parameters = {
-      'text': 'IBM is an American multinational technology company headquartered in Armonk, New York, United States, with operations in over 170 countries.',
+      'text': req.body.text_entry,
       'features': {
         'entities': {
           'emotion': true,
@@ -48,11 +46,10 @@ app.get('/', function(req, res) {
           console.log(JSON.stringify(response, null, 2));
           res.send(response)
       });
-    
-    
-    //res.sendfile('./app/client/index.html');
-    //res.sendfile('./app/client/index.html');
 });
-app.all('/*', setupCORS);
+
+app.get('/henry', function(req, res) {      
+    res.send(henryJson);
+});
 
 app.listen(5000);

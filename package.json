@@ -16,6 +16,7 @@
     "gulp-nodemon": "^1.0.4"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "watson-developer-cloud": "^2.41.1"
   }

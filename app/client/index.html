@@ -35,8 +35,11 @@
     <div class="container">
       <div class="starter-template">
         <h1>Biarri Networks Front End Candidate Exercise</h1>
-        <p class="lead">
-          {{message}}
+        <p class="lead" ng-repeat="n in arrEmotions track by $index"> 
+          {{n.text_entry}}         
+          <pre ng-if="n.emotions">
+            {{n.emotions}}
+          </pre>
         </p>
       </div>
     </div>

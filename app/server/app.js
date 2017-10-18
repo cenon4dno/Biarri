@@ -20,9 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(express.static('./app/client/'));
 
 app.post('/emotion', function(req, res) {      
-    var natural_language_understanding = new NaturalLanguageUnderstandingV1(config);
-    console.log(req.body.text_entry);    
-    
+    var natural_language_understanding = new NaturalLanguageUnderstandingV1(config);    
     var parameters = {
       'text': req.body.text_entry,
       'features': {

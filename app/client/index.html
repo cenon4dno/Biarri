@@ -23,12 +23,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="#">Biarri Exercise</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>            
-          </ul>
-        </div><!--/.nav-collapse -->
+        </div>    
       </div>
     </nav>
 
@@ -36,10 +31,11 @@
       <div class="starter-template">
         <h1>Biarri Networks Front End Candidate Exercise</h1>
         <p class="lead" ng-repeat="n in arrEmotions track by $index"> 
-          {{n.text_entry}}         
-          <pre ng-if="n.emotions">
-            {{n.emotions}}
-          </pre>
+          <a ng-click="getEmotion($index)">>>{{$index}}</a> {{n.text_entry}}         
+          <span class="blackBox" ng-if="arrEmotionsActive == $index">
+            <br>
+              {{arrEmotionsMessage}}
+          </span>
         </p>
       </div>
     </div>

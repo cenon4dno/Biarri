@@ -1,13 +1,16 @@
 (function() {
   
     const app = angular.module('simple', []);
-    app      
-      .controller('index', ['$scope', '$http', indexController]);
+    app.controller('index', ['$scope', '$http', indexController]);
   
     function indexController($scope, $http, naturalLanguage) {
-      $scope.message = 'Hello Angular!';
-      $scope.getEmotionAnalysis = getEmotionAnalysis;
+      // Methods      
+      $scope.getEmotion = getEmotion;
+
+      // Init variables
       $scope.arrEmotions = [];
+      $scope.arrEmotionsActive = -1;
+      $scope.arrEmotionsMessage = "";
   
       init();
   
@@ -16,23 +19,17 @@
         $getJson = $http.get('/henry')
           .then(function(data){
             // Load Natural language service
-            $scope.getEmotionAnalysis(data.data);
+            $scope.arrEmotions = data.data;
           });    
-      }
-  
-      /**
-       * Call IBM Watson Emotion Analysis
-       * @param {object} data - Henry IV data
-       */
-      function getEmotionAnalysis(data) {
+      }      
 
-        angular.forEach(data, function(item) {
-          $http.post('/emotion', item)
-            .then(function(data){
-              item.emotions = data.data;
-              $scope.arrEmotions.push(item);
-            });                      
-        });        
+      function getEmotion(id) {
+        $http.post('/emotion', $scope.arrEmotions[id])
+          .then(function(data){
+            $scope.arrEmotionsActive = id;
+            $scope.arrEmotionsMessage = JSON.stringify(data);
+            console.log(id);
+          });
       }
     }
     

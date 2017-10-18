@@ -1,9 +1,9 @@
 # Biarri
 
 ## INSTALLATION:
-* Clone repo
-* Go into the directory then execute npm install
-* Run "gulp serve"
+* Clone Repo
+* Go into the directory then execute `npm install`
+* Run `gulp serve`
 
 
 ## STRUCTURE:
